@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forget Nothing Board &mdash; Legends of the Game</title>
+<meta name="description" content="What is being built next for Time Memoria and the Adventurer's Ledger, what is deliberately parked, and what was decided against.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Legends of the Game &middot; Everything. Forget Nothing.</p>
+
+  <div class="title-row">
+    <h1>Forget Nothing Board</h1>
+    <span class="clock" id="clock"></span>
+  </div>
+
+  <p class="standfirst">Everything open across Time Memoria, the Adventurer&rsquo;s Ledger, the studio web work and the data behind them. What is being built next, what is deliberately parked, and what was decided against &mdash; with the reason each one is where it is.</p>
+
+  <div class="gates">
+    <div class="gate-cell">
+      <span class="gate-k">Destination</span>
+      <span class="gate-v" id="destination"></span>
+      <span class="gate-n">Time Memoria goes to the official plugin repository&rsquo;s testing track first. Promotion to stable is a later step.</span>
+    </div>
+    <div class="gate-cell">
+      <span class="gate-k">Version gate</span>
+      <span class="gate-v met" id="versiongate"></span>
+      <span class="gate-n">Met. A threshold rather than an exact version, so later releases still clear it.</span>
+    </div>
+    <div class="gate-cell">
+      <span class="gate-k">Date gate</span>
+      <span class="gate-v unmet" id="dategate"></span>
+      <span class="gate-n">Both gates, not either one. Clearing one early is not a reason to submit.</span>
+    </div>
+    <div class="gate-cell">
+      <span class="gate-k">On the submission path</span>
+      <span class="gate-v" id="blockcount">&mdash;</span>
+      <span class="gate-n">Nothing else on this board moves the date.</span>
+    </div>
+  </div>
+
+  <div class="controls" id="filters">
+    <span class="controls-label">Project</span>
+  </div>
+
+  <div class="controls">
+    <span class="controls-label">View</span>
+    <button class="chip" id="only-gate" aria-pressed="false" type="button">Only the submission path</button>
+    <button class="chip" id="hide-done" aria-pressed="false" type="button">Hide shipped &amp; closed</button>
+    <span class="spacer"></span>
+    <span class="local-note" id="localnote"></span>
+    <button class="ghost-btn" id="export" type="button" hidden>Export cards.js</button>
+    <button class="ghost-btn" id="reset" type="button" hidden>Reset my arrangement</button>
+    <button class="ghost-btn" id="theme" type="button">Theme</button>
+  </div>
+</header>
+
+<main class="board" id="board"></main>
+
+<section class="legend">
+  <p><strong>How to read a card.</strong> The first chip names the project. <span class="tag gate">1&nbsp;OCT</span> marks a card on the submission path. <span class="tag after">AFTER</span> marks one placed deliberately after submission, where starting it early costs the date. No marker means the gate does not care either way.</p>
+  <p><strong>Closed is not a bin.</strong> Every card there was decided once, with a reason. The column exists so the decision is visible instead of being made again.</p>
+  <p><strong>Moving cards.</strong> Drag a card, or use the arrows on it. Your arrangement is kept in this browser only and changes nothing for anyone else. The board itself changes when <code>cards.js</code> changes in the repository.</p>
+  <p>Source: <a href="https://github.com/LegendsOfTheGame/roadmap">github.com/LegendsOfTheGame/roadmap</a> &middot; Time Memoria: <a href="https://github.com/LegendsOfTheGame/TimeMemoriaV3">TimeMemoriaV3</a></p>
+</section>
+
+<script src="cards.js"></script>
+<script src="board.js"></script>
+</body>
+</html>
