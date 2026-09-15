@@ -72,7 +72,7 @@ const CARDS = [
 
   { id: "mentor", p: "tm", c: "ready", gate: null,
     t: "Mentor tracking, two tracks per character",
-    d: "Battle and Trade side by side, per character. G'raha Tia, Y'shtola and Haurchefant each hold Trade Mentor; the Warrior of Light is working toward both crowns at once. A single mentor flag would miss the point entirely. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
+    d: "Battle and Trade side by side, per character. Alphinaud, Alisaie and Haurchefant each hold Trade Mentor; the Warrior of Light is working toward both crowns at once. A single mentor flag would miss the point entirely. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
     s: null },
 
   { id: "gear-gaps", p: "tm", c: "unsettled", gate: null,
