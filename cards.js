@@ -72,7 +72,7 @@ const CARDS = [
 
   { id: "mentor", p: "tm", c: "ready", gate: null,
     t: "Mentor tracking, two tracks per character",
-    d: "Battle and Trade side by side, per character. G'raha Tia, Y'shtola and Alphinaud each hold Trade Mentor; the Warrior of Light is working toward both crowns at once. A single mentor flag would miss the point entirely. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
+    d: "Battle and Trade side by side, per character. G'raha Tia, Y'shtola and Haurchefant each hold Trade Mentor; the Warrior of Light is working toward both crowns at once. A single mentor flag would miss the point entirely. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
     s: null },
 
   { id: "gear-gaps", p: "tm", c: "unsettled", gate: null,
@@ -319,7 +319,7 @@ const CARDS = [
 
   { id: "sh-journal", p: "tm", c: "shipped", gate: null,
     t: "One character's journal stays its own",
-    d: "A sweep could fire in the gap between logout and login, when the client had already switched characters but the quest data had not. It ran 0.6 seconds before the login event and wrote 615 of Alphinaud's completed quests into the Warrior of Light's journal, stamped with that day's date. The journal now drops an entry the game reports unfinished, so it self-corrects.",
+    d: "A sweep could fire in the gap between logout and login, when the client had already switched characters but the quest data had not. It ran 0.6 seconds before the login event and wrote 615 of Haurchefant's completed quests into the Warrior of Light's journal, stamped with that day's date. The journal now drops an entry the game reports unfinished, so it self-corrects.",
     s: null },
 
   { id: "sh-attrs", p: "tm", c: "shipped", gate: null,

@@ -87,10 +87,15 @@ browser.
 
 ## Character names
 
-A card that cites a real reading names the character after a Scion of the
-Seventh Dawn. The reading is real. The name stands in for the character that
-produced it. Use the same stand-in for the same character every time, or the
-cards stop describing one history.
+A card that cites a real reading names the character after an ally from the
+game's own story. The reading is real. The name stands in for the character that
+produced it.
+
+Two rules hold the stand-ins together:
+
+1. Use the same stand-in for the same character every time, or the cards stop
+   describing one history.
+2. Match the character's sex.
 
 ## What this repository is not
 
