@@ -19,7 +19,35 @@
   var onlyGate = false;
   var hideDone = false;
 
+  var HISTORY = ["shipped", "removed"];
+
   var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------------- movement rules ----------------
+   *
+   * Shipped and Removed are history. What shipped, shipped — a card does not
+   * travel back into the planning columns and pretend it never went out.
+   * The only way out of Shipped is a withdrawal, and the only way out of
+   * Removed is the withdrawal being reversed.
+   *
+   * Removed is also unreachable from anywhere else: nothing can be pulled
+   * that was never released.
+   */
+
+  function canMove(from, to) {
+    if (from === to) return false;
+    if (to === "removed") return from === "shipped";
+    if (from === "shipped") return to === "removed";
+    if (from === "removed") return to === "shipped";
+    return true;
+  }
+
+  function refuseReason(from, to) {
+    if (to === "removed") return "Only something released can be withdrawn.";
+    if (from === "shipped") return "What shipped, shipped. It can only be withdrawn.";
+    if (from === "removed") return "A withdrawn card returns to Shipped, or stays put.";
+    return "";
+  }
 
   /* ---------------- storage ---------------- */
 
@@ -91,7 +119,7 @@
     });
 
     COLUMNS.forEach(function (col) {
-      if (hideDone && (col.id === "shipped" || col.id === "closed")) return;
+      if (hideDone && (HISTORY.indexOf(col.id) !== -1 || col.id === "closed")) return;
 
       var section = document.createElement("section");
       section.className = "col";
@@ -135,7 +163,7 @@
 
     var onPath = CARDS.filter(function (c) {
       var where = colOf(c);
-      return c.gate === "1oct" && where !== "shipped" && where !== "closed";
+      return c.gate === "1oct" && HISTORY.indexOf(where) === -1 && where !== "closed";
     }).length;
     $("blockcount").textContent = onPath + (onPath === 1 ? " card" : " cards");
 
@@ -201,12 +229,8 @@
     var idx = COLUMNS.findIndex(function (x) { return x.id === colId; });
 
     foot.append(
-      arrowBtn("←", "Move “" + c.t + "” left", idx <= 0, function () {
-        moveCard(c.id, COLUMNS[idx - 1].id);
-      }),
-      arrowBtn("→", "Move “" + c.t + "” right", idx >= COLUMNS.length - 1, function () {
-        moveCard(c.id, COLUMNS[idx + 1].id);
-      })
+      stepBtn(c, colId, idx, -1, "←", "left"),
+      stepBtn(c, colId, idx, 1, "→", "right")
     );
 
     if (placements[c.id]) {
@@ -228,19 +252,38 @@
     return el;
   }
 
-  function arrowBtn(glyph, label, disabled, onClick) {
+  function stepBtn(card, colId, idx, step, glyph, direction) {
+    var target = COLUMNS[idx + step];
     var b = document.createElement("button");
     b.type = "button";
     b.className = "move";
     b.textContent = glyph;
-    b.setAttribute("aria-label", label);
-    b.disabled = disabled;
-    if (!disabled) b.addEventListener("click", onClick);
+
+    if (!target) {
+      b.disabled = true;
+      b.title = "No column that way.";
+      b.setAttribute("aria-label", "No column " + direction + " of " + COLUMNS[idx].name);
+      return b;
+    }
+
+    if (!canMove(colId, target.id)) {
+      b.disabled = true;
+      b.title = refuseReason(colId, target.id);
+      b.setAttribute("aria-label", b.title);
+      return b;
+    }
+
+    b.title = "Move to " + target.name;
+    b.setAttribute("aria-label", "Move “" + card.t + "” to " + target.name);
+    b.addEventListener("click", function () { moveCard(card.id, target.id); });
     return b;
   }
 
   function wireDrop(section, colId) {
     section.addEventListener("dragover", function (e) {
+      /* dragging holds the card being dragged; its column decides the drop. */
+      var from = dragFrom();
+      if (from === null || !canMove(from, colId)) return;   /* no preventDefault: refuse */
       e.preventDefault();
       e.dataTransfer.dropEffect = "move";
       section.classList.add("drop");
@@ -256,9 +299,17 @@
     });
   }
 
+  function dragFrom() {
+    var el = document.querySelector(".card.dragging");
+    if (!el) return null;
+    var card = CARDS.find(function (c) { return c.id === el.dataset.id; });
+    return card ? colOf(card) : null;
+  }
+
   function moveCard(id, colId) {
     var card = CARDS.find(function (c) { return c.id === id; });
     if (!card) return;
+    if (!canMove(colOf(card), colId)) return;
     if (card.c === colId) delete placements[id];
     else placements[id] = colId;
     writeStore();

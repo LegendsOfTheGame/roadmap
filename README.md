@@ -14,10 +14,29 @@ certain, not as it becomes more finished:
 | In flight | Work in progress. |
 | Parked | Deferred on purpose. Each card names the condition that unparks it. |
 | Shipped | Released and verified in game. |
+| Removed | Shipped, then withdrawn. The card records why it was pulled. |
 | Closed | Decided against, with the reason. |
 
 **Closed is not a bin.** Each card in that column records a decision and the
 reason for it. The column prevents the same decision from being made again.
+
+## Movement rules
+
+What shipped, shipped. A released card does not go back into the planning
+columns.
+
+- A card in **Shipped** moves only to **Removed**.
+- A card in **Removed** moves only to **Shipped**, if the withdrawal is
+  reversed.
+- **Removed** is unreachable from every other column. Nothing can be withdrawn
+  that was never released.
+- All other columns move freely.
+
+The rules apply to the arrow buttons and to drag and drop. A refused arrow is
+disabled and states the reason. A refused column does not accept a drop.
+
+**The rules do not apply to `cards.js`.** A card's `c` field is set by hand. Use
+that to correct a mistake. Use the columns to record what happened.
 
 ## Gate markers
 

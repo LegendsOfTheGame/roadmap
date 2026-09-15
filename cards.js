@@ -49,6 +49,9 @@ const COLUMNS = [
   { id: "shipped", name: "Shipped",
     note: "Released and verified in game. A build that compiles does not count.",
     empty: "Nothing shipped yet." },
+  { id: "removed", name: "Removed",
+    note: "Shipped, then withdrawn. The card stays and records why it was pulled.",
+    empty: "Nothing has been withdrawn." },
   { id: "closed", name: "Closed",
     note: "Decided against, with the reason. Not reopened without new facts.",
     empty: "Nothing closed." }
