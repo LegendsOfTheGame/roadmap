@@ -85,6 +85,13 @@ The page follows the visitor's system theme. The **Theme** button overrides it
 in three steps: dark, light, then system again. The choice is stored in the
 browser.
 
+## Character names
+
+A card that cites a real reading names the character after a Scion of the
+Seventh Dawn. The reading is real. The name stands in for the character that
+produced it. Use the same stand-in for the same character every time, or the
+cards stop describing one history.
+
 ## What this repository is not
 
 This board holds the public view of the work. It records decisions and their

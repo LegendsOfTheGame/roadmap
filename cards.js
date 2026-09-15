@@ -72,7 +72,7 @@ const CARDS = [
 
   { id: "mentor", p: "tm", c: "ready", gate: null,
     t: "Mentor tracking, two tracks per character",
-    d: "Battle and Trade side by side. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
+    d: "Battle and Trade side by side, per character. G'raha Tia, Y'shtola and Alphinaud each hold Trade Mentor; the Warrior of Light is working toward both crowns at once. A single mentor flag would miss the point entirely. Nothing left to find out — commendations and duty counts already export, and the five role quests read as plain quest completion, which carries none of the achievement window's caveats.",
     s: null },
 
   { id: "gear-gaps", p: "tm", c: "unsettled", gate: null,
@@ -186,7 +186,7 @@ const CARDS = [
 
   { id: "hunts-reconcile", p: "pl", c: "ready", gate: null,
     t: "Reconcile the Hunts tab against the game",
-    d: "The game tracks unique elite mark kills, but only ever reports how many, never which. That count is still worth surfacing: one character's tab had a single mark ticked in a region where the game reported five. A line reading “the game says 5, you have ticked 1” is the whole feature.",
+    d: "The game tracks unique elite mark kills, but only ever reports how many, never which. That count is still worth surfacing. The Warrior of Light's tab had none of the six La Noscea A ranks ticked; the game reported five. A line reading “the game says 5, you have ticked 0” is the whole feature.",
     s: null },
 
   { id: "hunts-late", p: "pl", c: "parked", gate: null,
@@ -319,7 +319,7 @@ const CARDS = [
 
   { id: "sh-journal", p: "tm", c: "shipped", gate: null,
     t: "One character's journal stays its own",
-    d: "A sweep could fire in the gap between logout and login, when the client had already switched characters but the quest data had not. One character's completions were written into another's journal and stamped with that day's date. The journal now drops an entry the game reports unfinished, so it self-corrects.",
+    d: "A sweep could fire in the gap between logout and login, when the client had already switched characters but the quest data had not. It ran 0.6 seconds before the login event and wrote 615 of Alphinaud's completed quests into the Warrior of Light's journal, stamped with that day's date. The journal now drops an entry the game reports unfinished, so it self-corrects.",
     s: null },
 
   { id: "sh-attrs", p: "tm", c: "shipped", gate: null,
