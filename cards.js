@@ -15,7 +15,7 @@
 const META = {
   gateDate: Date.UTC(2026, 9, 1),        // 1 October 2026
   gateDateLabel: "1 October 2026",
-  version: "3.7.0.15",
+  version: "3.7.1.15",
   versionGate: "3.5.0.15",
   destination: "goatcorp/DalamudPluginsD17"
 };
@@ -299,6 +299,16 @@ const CARDS = [
     s: "Docs/releasing.md" },
 
   /* ---------------- shipped ---------------- */
+
+  { id: "sh-371", p: "tm", c: "shipped", gate: null,
+    t: "3.7.1.15 — Ko-fi, and two panels that scroll",
+    d: "An optional Ko-fi button in the classic Credits tab and the native Settings tab. The plugin stays free and nothing changes for anyone who ignores it. The native Overview and Settings tabs now scroll: both had outgrown the window and cut off their last rows.",
+    s: null },
+
+  { id: "sh-kofi-sites", p: "pl", c: "shipped", gate: null,
+    t: "Ko-fi on the Ledger and this board",
+    d: "A plain link, not Ko-fi's widget script. The Ledger promises that your data never leaves your browser, and a third-party script would break that promise.",
+    s: null },
 
   { id: "sh-37", p: "tm", c: "shipped", gate: null,
     t: "3.7.0.15 — unfinished lists per expansion",
