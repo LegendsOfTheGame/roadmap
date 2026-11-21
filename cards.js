@@ -360,11 +360,6 @@ const CARDS = [
     d: "Shipped in 3.8.0.15. The export carries every duty the game records as cleared, read straight from the game rather than inferred from the quest that follows it. Quest battles and deep dungeon floors never record a clear there, so the Ledger covers those from quests and achievements. The Hall of the Novice is left out: the game's record of it proved unreliable, and once made an export count 202 duties where the true number was 192.",
     s: null },
 
-  { id: "no-features-sep", p: "tm", c: "shipped", gate: null,
-    t: "Feature freeze until the gate",
-    d: "Done. The settle week ran from 25 September to 1 October: days of ordinary use on what had already shipped, and nothing new added. The submission then came to wait on API 16 instead, so releases resumed in October.",
-    s: null },
-
   { id: "sh-371", p: "tm", c: "shipped", gate: null,
     t: "3.7.1.15 — Ko-fi, and two panels that scroll",
     d: "An optional Ko-fi button in the classic Credits tab and the native Settings tab. The plugin stays free and nothing changes for anyone who ignores it. The native Overview and Settings tabs now scroll: both had outgrown the window and cut off their last rows.",
