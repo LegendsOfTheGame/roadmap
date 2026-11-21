@@ -1,7 +1,7 @@
 # Forget Nothing Board
 
 The public roadmap for [Legends of the Game](https://legendmemoria.org): what is
-being built next for **Time Memoria** and the **Adventurer's Ledger**, what is
+being built next for **Tales of Milestones** (formerly Time Memoria) and the **Adventurer's Ledger**, what is
 parked, and what was decided against.
 
 The board has six columns. A card moves left to right as it becomes more
@@ -40,7 +40,7 @@ that to correct a mistake. Use the columns to record what happened.
 
 ## Gate markers
 
-Time Memoria goes to the official Dalamud plugin repository. Two conditions
+Tales of Milestones goes to the official Dalamud plugin repository. Two conditions
 must be met, not one: a minimum version, and a date. A card carries a marker
 when it bears on that:
 

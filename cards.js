@@ -15,14 +15,14 @@
 const META = {
   gateDate: Date.UTC(2026, 9, 1),        // 1 October 2026
   gateDateLabel: "1 October 2026",
-  version: "3.7.1.15",
+  version: "3.15.0.15",
   versionGate: "3.5.0.15",
   destination: "goatcorp/DalamudPluginsD17"
 };
 
 const PROJECTS = {
-  tm:     { name: "Time Memoria",  short: "TIME MEMORIA", hue: "var(--p-tm)",
-            blurb: "The Dalamud plugin. Quest pacing, read from the game." },
+  tm:     { name: "Tales of Milestones", short: "MILESTONES", hue: "var(--p-tm)",
+            blurb: "The Dalamud plugin, formerly Time Memoria. Quest pacing, read from the game." },
   pl:     { name: "The Ledger",    short: "LEDGER",       hue: "var(--p-pl)",
             blurb: "Pandora Lunar's Adventurer's Ledger, the web companion." },
   studio: { name: "Studio web",    short: "STUDIO",       hue: "var(--p-studio)",
@@ -63,15 +63,10 @@ const CARDS = [
 
   { id: "d17-submit", p: "tm", c: "parked", gate: "1oct",
     t: "Submit to the official plugin repository",
-    d: "A manifest PR into the testing track of goatcorp/DalamudPluginsD17. Two gates have to be met, not either one: a version at or above 3.5.0.15, and the date. The version gate is already met. Artwork is compliant — a 512×512 icon and current screenshots.",
+    d: "A manifest PR into the testing track of goatcorp/DalamudPluginsD17. Both original gates are met: the version passed 3.5.0.15 long ago, and 1 October has gone by. What holds it now is Dalamud API 16. The submission goes in as a 4.x build against API 16, and as of 18 November neither the Dalamud SDK nor KamiToolKit has an API 16 release. The text fixes that did not need API 16 are done. Artwork is compliant — a 512×512 icon and current screenshots.",
     s: "Docs/releasing.md" },
 
-  { id: "no-features-sep", p: "tm", c: "ready", gate: "1oct",
-    t: "Feature freeze until the gate",
-    d: "The last week before submission is for settling, not adding: days of ordinary use on what already shipped, and no new surface to go wrong. Every card marked AFTER is more interesting than this one, and not one of them moves the date.",
-    s: null },
-
-  /* ---------------- Time Memoria ---------------- */
+  /* ---------------- Tales of Milestones (formerly Time Memoria) ---------------- */
 
   { id: "mentor", p: "tm", c: "ready", gate: null,
     t: "Mentor tracking, two tracks per character",
@@ -88,31 +83,6 @@ const CARDS = [
     d: "A real hole in a system that is otherwise tracked end to end: Shadowbringers gave crafters and gatherers no class quest chain at all, and replaced it with a repeatable turn-in. So this is a new tracked category per job with its own rank and delivery count — not missing quest rows. The exact shape is still unprobed.",
     s: null },
 
-  { id: "lodestone-link", p: "tm", c: "ready", gate: null,
-    t: "The Lodestone link in the native window",
-    d: "The last open item in native parity. The closest existing node draws a full list-item hover bar, so a row that reads as a clickable label is real work rather than one property. Left out of the last parity pass rather than shipping something that looks clickable and is not.",
-    s: "Docs/native-parity.md" },
-
-  { id: "rebaseline-native", p: "tm", c: "ready", gate: null,
-    t: "Native parity for the journal re-baseline",
-    d: "The re-baseline controls shipped in the classic settings window first. The native window still needs them.",
-    s: "Docs/native-parity.md" },
-
-  { id: "duty-export", p: "tm", c: "ready", gate: "after",
-    t: "Export duty completion for the grid",
-    d: "Three tiers of certainty. Exact, from quest data: the quest that follows a duty gives the true answer for every dungeon and trial the story gates. Exact, from achievements: 53 Extreme and Minstrel's Ballad clears. A floor, from Mapping the Realm, which is a discovery achievement and must never overwrite a higher stored value. Guildhests stay hand-ticked, and say so.",
-    s: null },
-
-  { id: "relic-export", p: "tm", c: "ready", gate: "after",
-    t: "Relic names and completion",
-    d: "Relic quests already arrive in the export — the game files them under Class & Job Quests. Names come from the game's own achievement sheet, so the plugin can send name plus done and the Ledger seeds nothing by hand.",
-    s: null },
-
-  { id: "hunt-flags", p: "tm", c: "unsettled", gate: null,
-    t: "May the plugin export the hunt group flags?",
-    d: "A decision, not a probe. A per-mark kill record is a combat log and is permanently out of scope. But the plugin already exports duty and commendation counts, so a profile aggregate is not new ground. The principle wants settling before the Ledger asks for the data.",
-    s: "README.md" },
-
   { id: "ocean-build", p: "tm", c: "parked", gate: "after",
     t: "Ocean Fishing",
     d: "The game already computes this and only shows it at the ferry dock. Routes and rotation come from the route table — 144 rows, one twelve-element sequence shifted a place per day. Both boats, the next voyages, stops in order, unlocks read from the route's own quest column. Schedule from the game; bait and bite windows stay community measurement.",
@@ -128,20 +98,15 @@ const CARDS = [
     d: "The only planned change that alters what someone mid-A Realm Reborn sees, and the only one the game genuinely cannot supply. A level 50 Seventh Astral Era quest should rank as 2.x, not as the patch its id belongs to.",
     s: "Docs/4.0-checklist.md" },
 
-  { id: "api16", p: "tm", c: "parked", gate: "after",
+  { id: "api16", p: "tm", c: "parked", gate: "1oct",
     t: "Rebuild against API 16",
-    d: "Unparks when API 16 reaches general release. The API digit sorts last in the version, so it can never disqualify a build — but a forced update is a moment worth spending on something.",
+    d: "Now the one thing the submission waits on. The 4.x build that goes to the official repository has to target API 16, and as of 18 November neither the Dalamud SDK nor KamiToolKit has an API 16 release. Unparks when they do. The API digit sorts last in the version, so the rebuild can never disqualify a build.",
     s: "Docs/4.0-checklist.md" },
 
   { id: "gating-char", p: "tm", c: "ready", gate: null,
     t: "Build the gating test character",
     d: "A main character has done everything, which makes gating easy to write and impossible to test. A fresh character at level 10 with Fisher unlocked leaves one boat unlocked and one locked — permanently. A fixture, not a window that closes as you play. Every progression gate in the plugin needs it.",
     s: "Docs/4.0-checklist.md" },
-
-  { id: "ledger-url", p: "tm", c: "unsettled", gate: null,
-    t: "The Ledger address is compiled in",
-    d: "Every released build points at the current address for good, and the site is moving to its own domain. Redirects hold for now, which is the only reason this is not already a problem. Decide whether the plugin should read the address from somewhere that can change.",
-    s: null },
 
   /* ---------------- probes ---------------- */
 
@@ -172,26 +137,6 @@ const CARDS = [
 
   /* ---------------- the Ledger ---------------- */
 
-  { id: "backup-notice", p: "pl", c: "ready", gate: null,
-    t: "“We are moving — download your backup”",
-    d: "The one piece of the move worth doing early. Its clock starts when the notice goes up, not when the domain switches, and browser storage does not survive a change of origin. Without it every saved character is stranded.",
-    s: null },
-
-  { id: "duty-grid", p: "pl", c: "ready", gate: "after",
-    t: "The duty grid",
-    d: "Every dungeon, trial, raid and guildhest per expansion, ticked where done. Rows generated from the game's own content table, so no hand-kept list and new duties appear on patch day. The plugin supplies the exact answer where the story gates a duty, which is the part a Lodestone-only tracker cannot do.",
-    s: null },
-
-  { id: "relic-checklist", p: "pl", c: "ready", gate: "after",
-    t: "Relic checklist",
-    d: "Fed by the relic export. Ticked from the game rather than typed.",
-    s: null },
-
-  { id: "hunts-reconcile", p: "pl", c: "ready", gate: null,
-    t: "Reconcile the Hunts tab against the game",
-    d: "The game tracks unique elite mark kills, but only ever reports how many, never which. That count is still worth surfacing. The Warrior of Light's tab had none of the six La Noscea A ranks ticked; the game reported five. A line reading “the game says 5, you have ticked 0” is the whole feature.",
-    s: null },
-
   { id: "hunts-late", p: "pl", c: "parked", gate: null,
     t: "Later expansions have no hunt source",
     d: "Group achievements cover A Realm Reborn, Heavensward and Stormblood — 70 of 127 marks. Everything after that has counter achievements only. Those 57 stay hand-ticked, and the tab should say so plainly rather than look broken.",
@@ -216,12 +161,12 @@ const CARDS = [
 
   { id: "web-merge", p: "studio", c: "parked", gate: "after",
     t: "One origin for everything web-facing",
-    d: "The hub, the Ledger and the challenge trackers serve from one domain. One origin means one browser store, which is the whole point: a routine ticked on the checklist is ticked in the Ledger. Subdomains stay as redirects so existing addresses keep working.",
+    d: "Half done. legendmemoria.org already serves the Ledger, the Apex tracker and the plugin pages from one origin, which was the point: one browser store. The repositories are still separate, and a workflow copies them into the site. Folding them into one repository, with one licence across the lot, is the part still parked.",
     s: null },
 
   { id: "split-appjs", p: "studio", c: "parked", gate: "after",
     t: "Split the app into shell and per-game",
-    d: "The Ledger is one 199 KB script, nearly all of it specific to one game. This is not extra work on top of a shared layout — it is the shared layout. Shell: themes, save indicator, backup bar, and one countdown engine.",
+    d: "The Ledger's main script is now 396 KB, nearly all of it specific to one game. This is not extra work on top of a shared layout — it is the shared layout. Shell: themes, save indicator, backup bar, and one countdown engine.",
     s: null },
 
   { id: "reset-engine", p: "studio", c: "parked", gate: "after",
@@ -232,11 +177,6 @@ const CARDS = [
   { id: "challenge-rebirth", p: "studio", c: "parked", gate: "after",
     t: "Challenge trackers on the shared shell",
     d: "The themes already carry shape as well as colour — one sharpens every corner, another rounds them — so a game inheriting the shell inherits real personality, and the accent colour makes per-game identity a single line.",
-    s: null },
-
-  { id: "support", p: "studio", c: "ready", gate: null,
-    t: "A way to support the project",
-    d: "A donate link in the plugin's own settings window and on the sites. Donate links are common among approved plugins; it will be confirmed with the approval group at submission rather than assumed.",
     s: null },
 
   { id: "ads-ledger", p: "studio", c: "closed", gate: null,
@@ -273,7 +213,7 @@ const CARDS = [
 
   { id: "naive-time", p: "wiki", c: "ready", gate: null,
     t: "Timestamps ignore daylight saving",
-    d: "Fetch times are recorded in naive local time. An autumn clock change repeats an hour, so a stale record could win. Small, and it will happen in November.",
+    d: "Fetch times are recorded in naive local time. An autumn clock change repeats an hour, so a stale record could win. Small, and it comes round every November.",
     s: null },
 
   /* ---------------- closed, with the reason ---------------- */
@@ -299,6 +239,126 @@ const CARDS = [
     s: "Docs/releasing.md" },
 
   /* ---------------- shipped ---------------- */
+
+  { id: "sh-315", p: "tm", c: "shipped", gate: null,
+    t: "3.15.0.15 — an export half the size",
+    d: "Every id list in the export writes a run of consecutive ids as a pair, so a full export is about half its old size and quicker to paste. The data is the same. The Ledger reads it already, and exports from older versions still import.",
+    s: null },
+
+  { id: "sh-ledger-share", p: "pl", c: "shipped", gate: null,
+    t: "Share codes",
+    d: "Shipped with 3.15.0.15. Settings makes a short code that opens a read-only view of one character. Each share also stores a backup that your browser encrypts before it goes up, which only your owner key or a one-time recovery code can open. A timed code expires 48 hours after the last share; a permanent one updates itself after you save.",
+    s: null },
+
+  { id: "sh-314", p: "tm", c: "shipped", gate: null,
+    t: "3.14.0.15 — hunt counts, native parity, /tmwiki groups",
+    d: "Hunt group counts in the export, read on demand. Allied society quests in their own group under each expansion in /tmwiki, and held levequests listed by town. Journal re-baseline and Lodestone links in the native window. The Main Scenario rate stops at the final Main Scenario quest, and the Ledger link points at its new home.",
+    s: null },
+
+  { id: "kofi-title-heart", p: "tm", c: "shipped", gate: null,
+    t: "Ko-fi heart in the title bar",
+    d: "Shipped in 3.14.0.15. A heart in the classic main window's title bar opens the Ko-fi page. A link only, beside the one that stays in the Credits tab.",
+    s: null },
+
+  { id: "food-location-marker", p: "tm", c: "shipped", gate: null,
+    t: "Where each food is",
+    d: "Shipped in 3.14.0.15. Each row on the Bonuses tab shows where the food is: B1 to B4 for the inventory block, the same number /isearch gives, and S for the saddlebag. Probed against the game first — 26 of 26 visible food stacks matched.",
+    s: null },
+
+  { id: "sh-ledger-layout", p: "pl", c: "shipped", gate: null,
+    t: "The Ledger's new layout",
+    d: "Shipped with 3.13.0.15. Next Steps is the first screen, with Daily, Weekly and Seasonal in the rail. Each Challenge Log entry has its own row, routines can carry their own boxes, and the Ledger holds up to eight characters. The leftovers — Custom Deliveries boxes, the weekly meter, Armor and GARO cards — followed in 3.14.",
+    s: null },
+
+  { id: "sh-313", p: "tm", c: "shipped", gate: null,
+    t: "3.13.0.15 — eat from the window",
+    d: "An Eat button for each meal on the Bonuses tab and in /tm food, and /tm eat by role. Playtime in the export kept current. The native windows update once a second instead of every frame: about 1.2 ms down to 0.08 ms per frame in a test.",
+    s: null },
+
+  { id: "sh-311", p: "tm", c: "shipped", gate: null,
+    t: "3.11 — food from accepted quests",
+    d: "/tm food lists the quests in your journal that reward food, and an eye on the turn-in window opens it before you choose. Text follows the game's UI theme, so the light themes are readable. The download went from 12.7 MB to 1.3 MB. 3.11.1.15 fixed an unload error that needed a game restart.",
+    s: null },
+
+  { id: "sh-rename", p: "tm", c: "shipped", gate: null,
+    t: "3.10.1.15 — Time Memoria is now Tales of Milestones",
+    d: "A new name and nothing else. Settings, the quest journal and exports stay where they were, and the /tm commands do not change.",
+    s: null },
+
+  { id: "sh-310", p: "tm", c: "shipped", gate: null,
+    t: "3.10.0.15 — the /tm food window",
+    d: "The strongest meal held for each role, and where it is: inventory, saddlebag or a retainer by name. Saddlebag food is found straight after the game starts, not only after the saddlebag is opened. The last five exports per character are kept locally.",
+    s: null },
+
+  { id: "sh-38", p: "tm", c: "shipped", gate: null,
+    t: "3.8 and 3.9 — the collections export",
+    d: "A separate collections export with duty clears, per-expansion quest totals, mount speed, folklore tomes and the Master's Bestiary in 3.8.0.15, and relic stages held in 3.9.0.15.",
+    s: null },
+
+  { id: "sh-372", p: "tm", c: "shipped", gate: null,
+    t: "3.7.2 to 3.7.7 — /tmwiki and levequests",
+    d: "A /tmwiki window that links accepted quests to the wiki, and levequests shown with their job, turn-in count and copyable required items. Plus fixes to the installer buttons and to event names.",
+    s: null },
+
+  { id: "domain-move", p: "studio", c: "shipped", gate: null,
+    t: "Everything on legendmemoria.org",
+    d: "legendmemoria.org serves the Ledger at /lunar, the Apex tracker at /apex and the plugin pages at /plugins, all from one origin. The old Ledger address stays up with a moved notice.",
+    s: null },
+
+  { id: "support", p: "studio", c: "shipped", gate: null,
+    t: "A way to support the project",
+    d: "Shipped. A Ko-fi button in the plugin's settings since 3.7.1.15, a heart in the classic window's title bar since 3.14.0.15, and a plain Ko-fi link on the Ledger and this board. Links only: no counter, no popup, no reminder.",
+    s: null },
+
+  { id: "backup-notice", p: "pl", c: "shipped", gate: null,
+    t: "“We are moving — download your backup”",
+    d: "Shipped. The old github.io address shows a notice that the Ledger has moved, with a Download backup button. Browser storage does not survive a change of origin, so without it every saved character would have been stranded.",
+    s: null },
+
+  { id: "duty-grid", p: "pl", c: "shipped", gate: null,
+    t: "The duty grid",
+    d: "Every dungeon, trial, raid and guildhest per expansion, ticked where done. The rows are generated from the game's own Duty Finder table, so new duties appear on patch day with no hand-kept list, and the grid ticks itself from the plugin's duty export.",
+    s: null },
+
+  { id: "relic-checklist", p: "pl", c: "shipped", gate: null,
+    t: "Relic checklist",
+    d: "Shipped in 3.9.0.15 as its own Relics area, then rebuilt in 3.12 to count weapons and tools rather than quests: one panel per relic line, a By job view, and Armor and GARO cards. Filled from the plugin's relic export, not typed. When a line's first quest is not open yet, the card names the quest to do on the way to it.",
+    s: null },
+
+  { id: "hunts-reconcile", p: "pl", c: "shipped", gate: null,
+    t: "Reconcile the Hunts tab against the game",
+    d: "Shipped in 3.14.0.15. After an import, each A and S rank group shows the game's count beside your ticks — for example “The game counts 5 of 6; you have ticked 4”. It never ticks anything for you.",
+    s: null },
+
+  { id: "ledger-url", p: "tm", c: "shipped", gate: null,
+    t: "The Ledger address in the plugin",
+    d: "Shipped in 3.14.0.15. Open Adventurer's Ledger now goes to legendmemoria.org/lunar, the Ledger's permanent home. The old address stays up and says the Ledger has moved, so older builds still lead somewhere useful.",
+    s: null },
+
+  { id: "hunt-flags", p: "tm", c: "shipped", gate: null,
+    t: "Hunt group counts in the export",
+    d: "Decided yes, as an aggregate, and shipped in 3.14.0.15. The export carries the game's count for each of the 16 A and S rank “Mark of the …” achievements. It is the group count only: the plugin does not record which mark was killed, so the per-mark log stays closed. A Read hunt counts button asks the game for all 16, and only when it is pressed.",
+    s: "README.md" },
+
+  { id: "lodestone-link", p: "tm", c: "shipped", gate: null,
+    t: "The Lodestone link in the native window",
+    d: "Shipped in 3.14.0.15. Maintenance and Active Events rows in the native window have a Read button after the title, and it opens the Lodestone page. A button, so nothing looks clickable that is not.",
+    s: "Docs/native-parity.md" },
+
+  { id: "rebaseline-native", p: "tm", c: "shipped", gate: null,
+    t: "Native parity for the journal re-baseline",
+    d: "Shipped in 3.14.0.15. The native Settings tab can re-baseline the journal, as the classic window has since 3.5.0.15. Select Set Baseline, then select it again within five seconds to confirm.",
+    s: "Docs/native-parity.md" },
+
+  { id: "relic-export", p: "tm", c: "shipped", gate: null,
+    t: "Relic names and completion",
+    d: "Shipped in 3.9.0.15 and extended since. The collections export carries the highest relic stage held for each job, Zodiac to Cosmic Tools, read from the armoury chest, bags, saddlebag, retainers and glamour dresser. 3.12 added Lucis and Resplendent tools; 3.13 added relic armor, GARO gear and the Figmental, Exquisite and Deep Dungeon weapons.",
+    s: null },
+
+  { id: "duty-export", p: "tm", c: "shipped", gate: null,
+    t: "Export duty completion for the grid",
+    d: "Shipped in 3.8.0.15. The export carries every duty the game records as cleared, read straight from the game rather than inferred from the quest that follows it. Quest battles and deep dungeon floors never record a clear there, so the Ledger covers those from quests and achievements. The Hall of the Novice is left out: the game's record of it proved unreliable, and once made an export count 202 duties where the true number was 192.",
+    s: null },
 
   { id: "sh-371", p: "tm", c: "shipped", gate: null,
     t: "3.7.1.15 — Ko-fi, and two panels that scroll",
